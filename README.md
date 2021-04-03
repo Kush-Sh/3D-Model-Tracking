@@ -4,6 +4,18 @@ In this project, we are tracking an object in environment with the help of combi
 
 <img src="https://github.com/Kush-Sh/3D-Model-Tracking/blob/main/Images/1st.jpg?raw=true" width="1170" height="496" />
 
+
+#1. Step 1 - Findig the same object in multiple images
+With the help of key point matching in previous and current image with can be able to detect the 3D object in array of images. As we know vector of DMatch data structure hold the all-matched key points in both images, we the help of looping through all the matched key points we can find all the objects with bounding box associated with it.
+If the key point associate with query index present in previous image boxes and point associate with train index present in current image boxes, then that match represents the same box in both the images, hence pertain to same object in both the images.
+A key point present in box or not and which box ID, can be calculated with the help of loop of the all boxes present in particular frame. 
+Now if the match present in both the frames so the BOX ID of the particular frame (both frames) can be saved as the map of box IDs (paired together) and saved in a vector of matched bounding boxes.
+
+
+
+
+
+
 In this final project, you will implement the missing parts in the schematic. To do this, you will complete four major tasks: 
 1. First, you will develop a way to match 3D objects over time by using keypoint correspondences. 
 2. Second, you will compute the TTC based on Lidar measurements. 
