@@ -5,22 +5,22 @@ In this project, we are tracking an object in environment with the help of combi
 <img src="https://github.com/Kush-Sh/3D-Model-Tracking/blob/main/Images/1st.jpg?raw=true" width="1170" height="496" />
 
 
-#1. Step 1 - Findig the same object in multiple images
+# 1. Findig the same object in multiple images
 With the help of key point matching in previous and current image with can be able to detect the 3D object in array of images. As we know vector of DMatch data structure hold the all-matched key points in both images, we the help of looping through all the matched key points we can find all the objects with bounding box associated with it.
 If the key point associate with query index present in previous image boxes and point associate with train index present in current image boxes, then that match represents the same box in both the images, hence pertain to same object in both the images.
 A key point present in box or not and which box ID, can be calculated with the help of loop of the all boxes present in particular frame. 
 Now if the match present in both the frames so the BOX ID of the particular frame (both frames) can be saved as the map of box IDs (paired together) and saved in a vector of matched bounding boxes.
 
+# 2. Compute collision Time with the help of lidar points
+Computing the time-to-collision in seconds for all matched 3D objects using only Lidar measurements from the matched bounding boxes between current and previous frame with the of distance, velocity and time relation. For dealing with outliers – average of all points has been taken. So, the error in calculation reduces.
+
+# 3. Finding the keypoints within the bounding box (bounding boxex finds by YOLO detection)
+In this task all the matches associate with particular bounding box in both previous frame and current frame saved in bounding box key points matches. A loop has been performed through all the matches points in both frames, if the point key point present in both the frame, that particular match should be save as match key point associated with that box. The problem with these all matches it that, it contains some outliers. So, to remove the outliers, standard deviation is used. 95% percent within two standard deviations is used to remove the far matches in the vector of matches.
+
+# 4. Compute collision time with the help of Camera computation bases
+Two successive images collected from MONO camera setup is used to calculated TTC with the common points of interests. MedianDistRation is used to deal with the outliers, below code shows the implementation.
 
 
-
-
-
-In this final project, you will implement the missing parts in the schematic. To do this, you will complete four major tasks: 
-1. First, you will develop a way to match 3D objects over time by using keypoint correspondences. 
-2. Second, you will compute the TTC based on Lidar measurements. 
-3. You will then proceed to do the same using the camera, which requires to first associate keypoint matches to regions of interest and then to compute the TTC based on those matches. 
-4. And lastly, you will conduct various tests with the framework. Your goal is to identify the most suitable detector/descriptor combination for TTC estimation and also to search for problems that can lead to faulty measurements by the camera or Lidar sensor. In the last course of this Nanodegree, you will learn about the Kalman filter, which is a great way to combine the two independent TTC measurements into an improved version which is much more reliable than a single sensor alone can be. But before we think about such things, let us focus on your final project in the camera course. 
 
 ## Dependencies for Running Locally
 * cmake >= 2.8
